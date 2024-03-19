@@ -117,17 +117,24 @@
               <canvas id="lightIntensityChart"></canvas>
             </div>
     </div>
-                <button id="lightButton" class="btn btn-primary" onclick="toggleLight()">Éclairer</button>
             </div>
         </div>
-    
+    <style>
+      .card:hover {
+        transform: rotateY(180deg);
+        transform-style: preserve-3d;
+      }
+
+      .card-back {
+        transform: rotateY(180deg);
+      }
+    </style>
         <script>
             let labels = [];
             let temperatureData = [];
             let humidityData = [];
             let lightIntensityData = [];
             let client;
-            let isLightOn = false;
     
             function MQTTconnect() {
                 client = new Paho.MQTT.Client("172.16.72.193", 9001, "clientId" + new Date().getTime());
@@ -213,21 +220,6 @@
                 };
             }
     
-            function toggleLight() {
-                // Envoyer un message MQTT pour allumer/éteindre la lumière
-                const message = new Paho.MQTT.Message(isLightOn ? "off" : "on");
-                message.destinationName = "topicEclairage";
-                client.send(message);
-            }
-    
-            function updateLightButton() {
-                const lightButton = document.getElementById("lightButton");
-                lightButton.textContent = isLightOn ? "Éteindre" : "Éclairer";
-            }
-    
-            function controlLed(lightStatus) {
-                toggleLight(lightStatus);
-            }
     
             window.onload = function() {
                 MQTTconnect();
@@ -235,6 +227,106 @@
                 humidityChart = new Chart(document.getElementById('humidityChart').getContext('2d'), createChartConfig('Humidité', humidityData, 'Humidité (%)'));
                 lightIntensityChart = new Chart(document.getElementById('lightIntensityChart').getContext('2d'), createChartConfig('Intensité Lumineuse', lightIntensityData, 'Intensité Lumineuse (lux)'));
             };
+
+            function FrontOfCardTemperature() {
+              return (
+                <div className="bg-white rounded-lg shadow-md p-6 transition-all duration-100 delay-200 z-20 hover:opacity-0">
+                  <p class="text-center">Variation de Température</p>
+                  <canvas id="temperatureChart"></canvas> 
+                </div>
+              );
+            }
+
+            function BackOfCard() {
+              return (
+                <div className="bg-white rounded-lg shadow-md p-6 transition-all z-10 card-back">
+                  BACK OF CARD
+                </div>
+              );
+            }
+
+            export default function FlipHover() {
+              return (
+                <div className="relative w-96 h-60 rounded-2xl text-white overflow-hidden cursor-pointer transition-all duration-700 card">
+                  <FrontOfCard />
+                  <BackOfCard />
+                </div>
+              );
+            } function FrontOfCardTemperature() {
+              return (
+                <div className="absolute inset-0 w-full h-full flex justify-center items-center bg-gray-900 transition-all duration-100 delay-200 z-20 hover:opacity-0">
+                  FRONT
+                </div>
+              );
+            }
+
+            function BackOfCard() {
+              return (
+                <div className="absolute inset-0 w-full h-full flex justify-center items-center bg-black transition-all z-10 card-back">
+                  <p class="text-center">Variation de Température</p>
+                  <canvas id="temperatureChart"></canvas> 
+                </div>
+              );
+            }
+
+            export default function FlipHover() {
+              return (
+                <div className="relative w-96 h-60 rounded-2xl text-white overflow-hidden cursor-pointer transition-all duration-700 card">
+                  <FrontOfCard />
+                  <BackOfCard />
+                </div>
+              );
+            } function FrontOfCardHumidite() {
+              return (
+                <div className="absolute inset-0 w-full h-full flex justify-center items-center bg-gray-900 transition-all duration-100 delay-200 z-20 hover:opacity-0">
+                  <p class="text-center">Variation de Température</p>
+                  <canvas id="temperatureChart"></canvas> 
+                </div>
+              );
+            }
+
+            function BackOfCard() {
+              return (
+                <div className="absolute inset-0 w-full h-full flex justify-center items-center bg-black transition-all z-10 card-back">
+                  <p class="text-center">Variation d'Humidité</p>
+                  <canvas id="humidityChart"></canvas>
+                </div>
+              );
+            }
+
+            export default function FlipHover() {
+              return (
+                <div className="relative w-96 h-60 rounded-2xl text-white overflow-hidden cursor-pointer transition-all duration-700 card">
+                  <FrontOfCard />
+                  <BackOfCard />
+                </div>
+              );
+            } function FrontOfCardLumiere() {
+              return (
+                <div className="absolute inset-0 w-full h-full flex justify-center items-center bg-gray-900 transition-all duration-100 delay-200 z-20 hover:opacity-0">
+                  <p class="text-center">Variation de Température</p>
+                  <canvas id="temperatureChart"></canvas> 
+                </div>
+              );
+            }
+
+            function BackOfCard() {
+              return (
+                <div className="absolute inset-0 w-full h-full flex justify-center items-center bg-black transition-all z-10 card-back">
+                  <p class="text-center">Variation d'Intensité Lumineuse</p>
+                  <canvas id="lightIntensityChart"></canvas>
+                </div>
+              );
+            }
+
+            export default function FlipHover() {
+              return (
+                <div className="relative w-96 h-60 rounded-2xl text-white overflow-hidden cursor-pointer transition-all duration-700 card">
+                  <FrontOfCard />
+                  <BackOfCard />
+                </div>
+              );
+            }
         </script>
     
       </section>
