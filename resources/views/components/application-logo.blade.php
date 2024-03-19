@@ -1,1 +1,1 @@
-<img src="https://howtoculinaryherbgarden.com/wp-content/uploads/2020/02/smart-soil.jpg" class="shadow-xl rounded-full  align-middle border-none object-cover h-48 w-48" />
+<img src="https://howtoculinaryherbgarden.com/wp-content/uploads/2020/02/smart-soil.jpg" class="shadow-xl rounded-full  align-middle border-none object-cover h-16 w-16" />
