@@ -1,53 +1,76 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Http\Controllers;
 
-require __DIR__ . '/../../../vendor/autoload.php';
-require __DIR__ . '/../../../shared/config.php';
-require __DIR__ . '/../../../shared/SimpleLogger.php';
-
 use Illuminate\Http\Request;
-use PhpMqtt\Client\Examples\Shared\SimpleLogger;
-use PhpMqtt\Client\Exceptions\MqttClientException;
-use PhpMqtt\Client\MqttClient;
-use Psr\Log\LogLevel;
-use Session;
 
 class LumiereController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-       
-$logger = new SimpleLogger(LogLevel::INFO);
+        //
+    }
 
-try {
-    $client = new MqttClient(MQTT_BROKER_HOST, MQTT_BROKER_PORT, 'test-subscriber', MqttClient::MQTT_3_1, null, $logger);
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
 
-    $client->connect(null, true);
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        try {
+            $lumiere = new Lumiere();
+            $lumiere->device_id = $request->device_id;
 
-    $client->subscribe('topicLumiere', function (string $topic, string $message, bool $retained) use ($logger, $client) {
-        $logger->info('We received a {typeOfMessage} on topic [{topic}]: {message}', [
-            'topic' => $topic,
-            'message' => $message,
-            'typeOfMessage' => $retained ? 'retained message' : 'message',
-        ]);
+            $lumiere->save();
+        }
+        catch (\Exception $e) {
+            return redirect()->back()->with('errors', 'Error saving Lumiere data');
+        }
+        finally {
+            return redirect()->route('profile.edit')->with('status', 'Lumiere saved successfully');
 
-        Session::put('lumiere', $message);
+        }
+    }
 
-        $client->interrupt();
-    }, MqttClient::QOS_AT_LEAST_ONCE);
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
 
-    $client->loop(true);
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
 
-    // Gracefully terminate the connection to the broker.
-    $client->disconnect();
-} catch (MqttClientException $e) {
-    // MqttClientException is the base exception of all exceptions in the library. Catching it will catch all MQTT related exceptions.
-    $logger->error('Subscribing to a topic using QoS 1 failed. An exception occurred.', ['exception' => $e]);
-}
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
 
-return view('welcome');
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
     }
 }

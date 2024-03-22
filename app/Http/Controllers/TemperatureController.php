@@ -38,7 +38,7 @@ try {
             'typeOfMessage' => $retained ? 'retained message' : 'message',
         ]);
 
-        Session::put('temperature', $message);
+     
 
         // After receiving the first message on the subscribed topic, we want the client to stop listening for messages.
         $client->interrupt();

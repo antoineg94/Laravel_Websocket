@@ -47,28 +47,19 @@
                   Jardin IoT
                 </h3>
               </div>
-    
-    
-    
-    
-    
-             
               <div class="min-h-screen">
                 <div class="mx-auto max-w-3xl px-6 py-12">
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
-                      <div class="bg-white rounded-lg shadow-md p-6">
-                          <h2 class="text-xl font-bold mb-4">Température</h2>
-                          <strong id="infoTemperature">Aucune donnée</strong>
-                          <p class="text-gray-700">La température ambiante dans le jardin intelligent est maintenue à un niveau optimal, assurant des conditions idéales pour la croissance des plantes.</p>
-                        </div>
-                        <div class="p-6">
-                          <p class="text-center">Variation de Température</p>
-                          <canvas id="temperatureChart"></canvas>   
-                        </div>
-                      </div>
-                  
-
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                      <h2 class="text-xl font-bold mb-4">Température</h2>
+                      <strong id="infoTemperature">Aucune donnée</strong>
+                      <p class="text-gray-700">La température ambiante dans le jardin intelligent est maintenue à un niveau optimal, assurant des conditions idéales pour la croissance des plantes.</p>
+                    </div>
+                    <div class="p-6">
+                      <p class="text-center">Variation de Température</p>
+                      <canvas id="temperatureChart"></canvas>   
+                    </div>
+                  </div>
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
                     <div class="p-6">
                       <p class="text-center">Variation d'Intensité Lumineuse</p>
@@ -80,7 +71,6 @@
                         <p class="text-gray-700">Le niveau de lumière est contrôlé, garantissant un éclairage optimal pour favoriser la photosynthèse et la santé des plantes dans le jardin intelligent.</p>
                       </div>
                   </div>
-
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
                     <div class="bg-white rounded-lg shadow-md p-6">
                         <h2 class="text-xl font-bold mb-4">Humidité</h2>
@@ -91,23 +81,24 @@
                         <p class="text-center">Variation d'Humidité</p>
                         <canvas id="humidityChart"></canvas>
                       </div>
-                </div>
-               
-
-                <div class="mx-auto max-w-3xl px-6 py-12">  
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
-                        <div class="bg-white rounded-lg shadow-md p-6">
-                            <h2 class="text-xl font-bold mb-4">État des lumières</h2>
-                            <strong id="etatLumieres">Allumé / Éteinte</strong> 
-                          </div>
-                        <div class="bg-white rounded-lg shadow-md p-6">
-                            <h2 class="text-xl font-bold mb-4">État de la pompe</h2>
-                            <strong id="etatPompe">Allumé / Éteinte</strong>
-                          </div>
-                    </div>
-                </div>
-           
-
+                  </div>
+                  <div class="mx-auto max-w-3xl px-6 py-12">  
+                      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
+                          <div class="bg-white rounded-lg shadow-md p-6">
+                              <h2 class="text-xl font-bold mb-4">État des lumières</h2>
+                              <strong id="etatLumieres">Allumé / Éteinte</strong> 
+                            </div>
+                          <div class="bg-white rounded-lg shadow-md p-6">
+                              <h2 class="text-xl font-bold mb-4">État de la pompe</h2>
+                              <strong id="etatPompe">Allumé / Éteinte</strong>
+                            </div>
+                      </div>
+                  </div>
+     {{--              <form action="{{ route('lumiere.store') }}" method="POST">
+                    @csrf 
+                    <input type="hidden" name="payloadString" value="{{ message.payloadString }}">
+                    <button type="submit">Submit</button>
+                </form> --}}
             </div>
         </div>
     <style>
