@@ -55,68 +55,59 @@
              
               <div class="min-h-screen">
                 <div class="mx-auto max-w-3xl px-6 py-12">
-    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
-                        <div class="bg-white rounded-lg shadow-md p-6">
-                            <h2 class="text-xl font-bold mb-4">Température</h2>
-                            <strong>18° C</strong>
-                            <p class="text-gray-700">La température ambiante dans le jardin intelligent est maintenue à un niveau optimal, assurant des conditions idéales pour la croissance des plantes.</p>
-                          </div>
-                        <div class="bg-white rounded-lg shadow-md p-6">
-                            <h2 class="text-xl font-bold mb-4">Lumière</h2>
-                            <strong>25</strong>
-                            <p class="text-gray-700">Le niveau de lumière est contrôlé, garantissant un éclairage optimal pour favoriser la photosynthèse et la santé des plantes dans le jardin intelligent.</p>
-                          </div>
-                        <div class="bg-white rounded-lg shadow-md p-6">
-                            <h2 class="text-xl font-bold mb-4">Humidité</h2>
-                            <strong>{{Session::get('humidite')}}%</strong>
-                            <p class="text-gray-700">Le taux d'humidité dans le jardin intelligent est maintenu à un certain niveau, assurant des conditions de croissance optimales pour les plantes tout en prévenant les maladies liées à l'humidité excessive ou insuffisante.</p>
-                          </div>
-                        <div class="bg-white rounded-lg shadow-md p-6">
-                            <h2 class="text-xl font-bold mb-4">Température (relatif a l'humidité)</h2>
-                            <strong>16° C</strong>
-                            <p class="text-gray-700">La température définie en fonction du capteur d'humidité, garantissant un équilibre parfait entre chaleur et humidité pour une croissance optimale des plantes.</p>
-                          </div>
-                    </div>
-                </div>
 
-                <div class="mx-auto max-w-3xl px-6 py-12">
-    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
+                      <div class="bg-white rounded-lg shadow-md p-6">
+                          <h2 class="text-xl font-bold mb-4">Température</h2>
+                          <strong id="infoTemperature">Aucune donnée</strong>
+                          <p class="text-gray-700">La température ambiante dans le jardin intelligent est maintenue à un niveau optimal, assurant des conditions idéales pour la croissance des plantes.</p>
+                        </div>
+                        <div class="p-6">
+                          <p class="text-center">Variation de Température</p>
+                          <canvas id="temperatureChart"></canvas>   
+                        </div>
+                      </div>
+                  
+
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
+                    <div class="p-6">
+                      <p class="text-center">Variation d'Intensité Lumineuse</p>
+                      <canvas id="lightIntensityChart"></canvas>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h2 class="text-xl font-bold mb-4">Lumière</h2>
+                        <strong id="infoLumiere">Aucune donnée</strong>
+                        <p class="text-gray-700">Le niveau de lumière est contrôlé, garantissant un éclairage optimal pour favoriser la photosynthèse et la santé des plantes dans le jardin intelligent.</p>
+                      </div>
+                  </div>
+
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h2 class="text-xl font-bold mb-4">Humidité</h2>
+                        <strong id="infoHumidite">Aucune donnée</strong>
+                        <p class="text-gray-700">Le taux d'humidité dans le jardin intelligent est maintenu à un certain niveau, assurant des conditions de croissance optimales pour les plantes tout en prévenant les maladies liées à l'humidité excessive ou insuffisante.</p>
+                      </div>
+                      <div class="p-6">
+                        <p class="text-center">Variation d'Humidité</p>
+                        <canvas id="humidityChart"></canvas>
+                      </div>
+                </div>
+               
+
+                <div class="mx-auto max-w-3xl px-6 py-12">  
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
                         <div class="bg-white rounded-lg shadow-md p-6">
                             <h2 class="text-xl font-bold mb-4">État des lumières</h2>
-                            <strong>Allumé / Éteinte</strong> 
+                            <strong id="etatLumieres">Allumé / Éteinte</strong> 
                           </div>
                         <div class="bg-white rounded-lg shadow-md p-6">
                             <h2 class="text-xl font-bold mb-4">État de la pompe</h2>
-                            <strong>Allumé / Éteinte</strong>
-                           
-                          </div>
-                        <div class="bg-white rounded-lg shadow-md p-6">
-                            <h2 class="text-xl font-bold mb-4">Niveau de l'eau</h2>
-                            <strong>Bas / normal / haut</strong>
+                            <strong id="etatPompe">Allumé / Éteinte</strong>
                           </div>
                     </div>
                 </div>
-            </div>
-    
-    
-    
-    
-    <div class="flex">
-            <div class="col-lg-4">
-              <p class="text-center">Variation de Température</p>
-              <canvas id="temperatureChart"></canvas>   
-            </div>
-            <div class="col-lg-4">
-              <p class="text-center">Variation d'Humidité</p>
-              <canvas id="humidityChart"></canvas>
-            </div>
-            <div class="col-lg-4">
-              <p class="text-center">Variation d'Intensité Lumineuse</p>
-              <canvas id="lightIntensityChart"></canvas>
-            </div>
-    </div>
+           
+
             </div>
         </div>
     <style>
@@ -135,12 +126,24 @@
             let humidityData = [];
             let lightIntensityData = [];
             let client;
+
+            let infoLumiere;
+            let infoHumidite;
+            let infoTemperature;
+
+            let etatLumieres;
+            let etatPompe;
+
+            infoLumiere = document.getElementById('infoLumiere');
+            infoHumidite = document.getElementById('infoHumidite');
+            infoTemperature = document.getElementById('infoTemperature');
     
             function MQTTconnect() {
                 client = new Paho.MQTT.Client("172.16.72.193", 9001, "clientId" + new Date().getTime());
                 client.onConnectionLost = onConnectionLost;
                 client.onMessageArrived = onMessageArrived;
                 client.connect({onSuccess:onConnect});
+                console.log('connecté')
             }
     
             function onConnect() {
@@ -165,18 +168,22 @@
                 switch(message.destinationName) {
                     case "topicTemperature":
                         updateChart(temperatureChart, temperatureData, parseFloat(message.payloadString), time);
+                        infoTemperature.innerHTML = message.payloadString + '°C';
                         break;
                     case "topicHumidite":
                         updateChart(humidityChart, humidityData, parseFloat(message.payloadString), time);
+                        infoHumidite.innerHTML = message.payloadString + '%';
                         break;
                     case "topicLumiere":
                         updateChart(lightIntensityChart, lightIntensityData, parseFloat(message.payloadString), time);
-                        isLightOn = message.payloadString === "on";
-                        updateLightButton();
+                        infoLumiere.innerHTML = message.payloadString + ' lux';
                         break;
-                    case "topicEclairage":
-                        controlLed(message.payloadString);
+                    case"topicEclairage":
+                        etatLumieres.innerHTML = message.payloadString;
                         break;
+                    case"topicPompe":
+                    etatPompe.innerHTML = message.payloadString;
+                    break;
                 }
             }
     
@@ -196,13 +203,13 @@
     
             function createChartConfig(label, data, yAxisLabel) {
                 return {
-                    type: 'bar',
+                    type: 'line',
                     data: {
                         labels: labels,
                         datasets: [{
                             label: label,
-                            backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                            borderColor: 'rgba(54, 162, 235, 1)',
+                            backgroundColor: 'rgba(125, 218, 88, 0.6)',
+                            borderColor: 'rgba(125, 218, 88, .6)',
                             borderWidth: 1,
                             data: data,
                         }]
@@ -228,105 +235,7 @@
                 lightIntensityChart = new Chart(document.getElementById('lightIntensityChart').getContext('2d'), createChartConfig('Intensité Lumineuse', lightIntensityData, 'Intensité Lumineuse (lux)'));
             };
 
-            function FrontOfCardTemperature() {
-              return (
-                <div className="bg-white rounded-lg shadow-md p-6 transition-all duration-100 delay-200 z-20 hover:opacity-0">
-                  <p class="text-center">Variation de Température</p>
-                  <canvas id="temperatureChart"></canvas> 
-                </div>
-              );
-            }
-
-            function BackOfCard() {
-              return (
-                <div className="bg-white rounded-lg shadow-md p-6 transition-all z-10 card-back">
-                  BACK OF CARD
-                </div>
-              );
-            }
-
-            export default function FlipHover() {
-              return (
-                <div className="relative w-96 h-60 rounded-2xl text-white overflow-hidden cursor-pointer transition-all duration-700 card">
-                  <FrontOfCard />
-                  <BackOfCard />
-                </div>
-              );
-            } function FrontOfCardTemperature() {
-              return (
-                <div className="absolute inset-0 w-full h-full flex justify-center items-center bg-gray-900 transition-all duration-100 delay-200 z-20 hover:opacity-0">
-                  FRONT
-                </div>
-              );
-            }
-
-            function BackOfCard() {
-              return (
-                <div className="absolute inset-0 w-full h-full flex justify-center items-center bg-black transition-all z-10 card-back">
-                  <p class="text-center">Variation de Température</p>
-                  <canvas id="temperatureChart"></canvas> 
-                </div>
-              );
-            }
-
-            export default function FlipHover() {
-              return (
-                <div className="relative w-96 h-60 rounded-2xl text-white overflow-hidden cursor-pointer transition-all duration-700 card">
-                  <FrontOfCard />
-                  <BackOfCard />
-                </div>
-              );
-            } function FrontOfCardHumidite() {
-              return (
-                <div className="absolute inset-0 w-full h-full flex justify-center items-center bg-gray-900 transition-all duration-100 delay-200 z-20 hover:opacity-0">
-                  <p class="text-center">Variation de Température</p>
-                  <canvas id="temperatureChart"></canvas> 
-                </div>
-              );
-            }
-
-            function BackOfCard() {
-              return (
-                <div className="absolute inset-0 w-full h-full flex justify-center items-center bg-black transition-all z-10 card-back">
-                  <p class="text-center">Variation d'Humidité</p>
-                  <canvas id="humidityChart"></canvas>
-                </div>
-              );
-            }
-
-            export default function FlipHover() {
-              return (
-                <div className="relative w-96 h-60 rounded-2xl text-white overflow-hidden cursor-pointer transition-all duration-700 card">
-                  <FrontOfCard />
-                  <BackOfCard />
-                </div>
-              );
-            } function FrontOfCardLumiere() {
-              return (
-                <div className="absolute inset-0 w-full h-full flex justify-center items-center bg-gray-900 transition-all duration-100 delay-200 z-20 hover:opacity-0">
-                  <p class="text-center">Variation de Température</p>
-                  <canvas id="temperatureChart"></canvas> 
-                </div>
-              );
-            }
-
-            function BackOfCard() {
-              return (
-                <div className="absolute inset-0 w-full h-full flex justify-center items-center bg-black transition-all z-10 card-back">
-                  <p class="text-center">Variation d'Intensité Lumineuse</p>
-                  <canvas id="lightIntensityChart"></canvas>
-                </div>
-              );
-            }
-
-            export default function FlipHover() {
-              return (
-                <div className="relative w-96 h-60 rounded-2xl text-white overflow-hidden cursor-pointer transition-all duration-700 card">
-                  <FrontOfCard />
-                  <BackOfCard />
-                </div>
-              );
-            }
+            
         </script>
     
       </section>
