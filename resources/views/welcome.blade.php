@@ -32,12 +32,11 @@
                   Bienvenue sur Jardin intelligent
                 </h1>
                 <p class="text-base xl:text-xl text-gray-600 mt-4">
-                  Le Jardin Intelligent est une plateforme étudiante dédiée au développement et à l'innovation des solutions de jardinage intelligentes.</p>
-          
-                <p class="text-sm xl:text-base text-gray-600 mt-8">
-                  Ici, vous découvrirez notre projet axés sur l'intégration de la technologie dans les pratiques de jardinage.
+                  Le Jardin Intelligent est une plateforme étudiante dédiée au développement et à l'innovation des solutions de jardinage intelligentes.
                 </p>
-                <a href="{{ route('login') }}"class="bg-blue-500 hover:bg-blue-700 px-6 py-4 text-white rounded block sm:inline-block mt-4 text-center font-bold">
+                <br>
+                <br>
+                <a href="{{ route('login') }}"class="bg-green-500 hover:bg-green-700 px-6 py-4 text-white rounded block sm:inline-block mt-4 text-center font-bold">
                   Se connecter
                 </a>
               </div>
@@ -188,12 +187,7 @@
                     </filter>
                   </defs>
                   <g transform="translate(1950.456 5248.5)">
-                    <rect width="1" height="225" transform="translate(-1285.5 -5047.5)" fill="#dfe3e8" />
-                    <rect width="1" height="225" transform="translate(-1255.5 -5167.5)" fill="#dfe3e8" opacity="0.5" />
-                    <rect width="1" height="225" transform="translate(-1189.5 -5112.5)" fill="#dfe3e8" />
-                    <rect width="1" height="225" transform="translate(-1091.5 -5138.5)" fill="#dfe3e8" opacity="0.5" />
-                    <rect width="1" height="225" transform="translate(-1075.5 -5040.5)" fill="#dfe3e8" />
-                    <rect width="1" height="225" transform="translate(-1132.5 -5189.5)" fill="#dfe3e8" />
+                    
                     <g transform="translate(-1950.5 -4962.067)">
                       <path
                         d="M847.9,82.732c-35.467,16.382-70.248,7.339-114.45-22.181-130.3-87.026-222.523-75.217-343.934,3.359-25.868,16.742-67.626,44.576-137.624,24.769C149.45,59.69,44.091,89,0,169.643H1161.727c-33.066-63-156.751-159.454-313.828-86.911"
@@ -384,69 +378,6 @@
                       transform="translate(-986.181 -4797.129)" fill="#3fc3d1" />
                     <path d="M15.007,5.28A14.817,14.817,0,0,0,5.306.032C1.663-.338-.8,2.564.241,5.28H15.007"
                       transform="translate(-1613.921 -4796.976)" fill="#6ce3f0" />
-                    <g transform="translate(-1109.5 -5110.5)">
-                      <g transform="matrix(1, 0, 0, 1, -840.96, -138)" filter="url(#ad)">
-                        <circle cx="34.5" cy="34.5" r="34.5" transform="translate(840.96 138)" fill="#fff" />
-                      </g>
-                      <g transform="translate(17 19)">
-                        <path d="M10,0,0,12H20L10,0" transform="translate(8)" fill="#b6eceb" /><text transform="translate(18 28)"
-                          fill="#454f5b" font-size="17.28" font-family="ArialRoundedMTBold, Arial Rounded MT">
-                          <tspan x="-17.647" y="0">25%</tspan>
-                        </text></g>
-                    </g>
-                    <g transform="translate(-1322.5 -5124.5)">
-                      <g transform="matrix(1, 0, 0, 1, -627.96, -124)" filter="url(#af)">
-                        <circle cx="38.5" cy="38.5" r="38.5" transform="translate(627.96 124)" fill="#fff" />
-                      </g>
-                      <g transform="translate(19 21)">
-                        <path d="M11,0,0,13H22L11,0" transform="translate(9)" fill="#007ace" /><text transform="translate(20 31)"
-                          fill="#454f5b" font-size="19.2" font-family="ArialRoundedMTBold, Arial Rounded MT">
-                          <tspan x="-19.608" y="0">96%</tspan>
-                        </text></g>
-                    </g>
-                    <g transform="translate(-1281.5 -5216.5)" opacity="0.5">
-                      <g transform="matrix(1, 0, 0, 1, -668.96, -32)" filter="url(#ah)">
-                        <circle cx="26.95" cy="26.95" r="26.95" transform="translate(668.96 32)" fill="#fff" />
-                      </g>
-                      <g transform="translate(13.3 14.7)">
-                        <path d="M7.7,0,0,9.1H15.4L7.7,0" transform="translate(6.3)" fill="#007ace" /><text
-                          transform="translate(14 22.1)" fill="#454f5b" font-size="13.44"
-                          font-family="ArialRoundedMTBold, Arial Rounded MT">
-                          <tspan x="-13.725" y="0">12%</tspan>
-                        </text></g>
-                    </g>
-                    <g transform="translate(-1220.5 -5170.5)">
-                      <g transform="matrix(1, 0, 0, 1, -729.96, -78)" filter="url(#aj)">
-                        <circle cx="31.185" cy="31.185" r="31.185" transform="translate(729.96 78)" fill="#fff" />
-                      </g>
-                      <g transform="translate(15.39 16.01)">
-                        <path d="M9,0,0,10H17L9,0" transform="translate(7.61 0.99)" fill="#ffc48b" /><text
-                          transform="translate(16.2 26.53)" fill="#454f5b" font-size="15.552"
-                          font-family="ArialRoundedMTBold, Arial Rounded MT">
-                          <tspan x="-15.882" y="0">85%</tspan>
-                        </text></g>
-                    </g>
-                    <g transform="translate(-1122.5 -5196.5)" opacity="0.5">
-                      <g transform="matrix(1, 0, 0, 1, -827.96, -52)" filter="url(#al)">
-                        <circle cx="31.185" cy="31.185" r="31.185" transform="translate(827.96 52)" fill="#fff" />
-                      </g>
-                      <g transform="translate(15.39 16.01)">
-                        <path d="M9,0,0,10H17L9,0" transform="translate(7.61 0.99)" fill="#ffc48b" /><text
-                          transform="translate(16.2 26.53)" fill="#454f5b" font-size="15.552"
-                          font-family="ArialRoundedMTBold, Arial Rounded MT">
-                          <tspan x="-15.882" y="0">12%</tspan>
-                        </text></g>
-                    </g>
-                    <g transform="translate(-1159.5 -5243.5)">
-                      <g transform="matrix(1, 0, 0, 1, -790.96, -5)" filter="url(#an)">
-                        <circle cx="27" cy="27" r="27" transform="translate(790.96 5)" fill="#fff" />
-                      </g>
-                      <g transform="translate(13 15)">
-                        <path d="M8,0,0,9H15L8,0" transform="translate(6)" fill="#95cdb1" /><text transform="translate(14 22)"
-                          fill="#454f5b" font-size="13.44" font-family="ArialRoundedMTBold, Arial Rounded MT">
-                          <tspan x="-13.725" y="0">10%</tspan>
-                        </text></g>
-                    </g>
                   </g>
                 </svg>
               </div>

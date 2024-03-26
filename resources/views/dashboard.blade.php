@@ -84,10 +84,13 @@
                   </div>
                   <div class="mx-auto max-w-3xl px-6 py-12">  
                       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
-                          <div class="bg-white rounded-lg shadow-md p-6">
+                        
+                          <button>
+                          <div class="rounded-lg shadow-md p-6 transition duration-300 hover:bg-gray-100"  >
                               <h2 class="text-xl font-bold mb-4">État des lumières</h2>
                               <strong id="etatLumieres">Allumé / Éteinte</strong> 
                             </div>
+                          </button>
                           <div class="bg-white rounded-lg shadow-md p-6">
                               <h2 class="text-xl font-bold mb-4">État de la pompe</h2>
                               <strong id="etatPompe">Allumé / Éteinte</strong>
