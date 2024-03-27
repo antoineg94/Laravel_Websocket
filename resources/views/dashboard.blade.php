@@ -43,7 +43,7 @@
                 </div>
               </div>
               <div class="text-center mt-12">
-                <h3 class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
+                <h3 class="text-4xl font-semibold leading-normal text-blueGray-700 mb-2">
                   Jardin IoT
                 </h3>
               </div>
@@ -85,7 +85,7 @@
                   <div class="mx-auto max-w-3xl px-6 py-12">  
                       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
                         
-                          <button>
+                          <button id="publishLightSwitch" onclick="toggleLight()">
                           <div class="rounded-lg shadow-md p-6 transition duration-300 hover:bg-gray-100"  >
                               <h2 class="text-xl font-bold mb-4">État des lumières</h2>
                               <strong id="etatLumieres">Allumé / Éteinte</strong> 
@@ -127,10 +127,15 @@
 
             let etatLumieres;
             let etatPompe;
+            let isLightOn = '';
+
+            let etatLightSwitch;
 
             infoLumiere = document.getElementById('infoLumiere');
             infoHumidite = document.getElementById('infoHumidite');
             infoTemperature = document.getElementById('infoTemperature');
+
+            etatLumieres = document.getElementById('etatLumieres');
     
             function MQTTconnect() {
                 client = new Paho.MQTT.Client("172.16.72.193", 9001, "clientId" + new Date().getTime());
@@ -145,7 +150,7 @@
                 client.subscribe("topicTemperature");
                 client.subscribe("topicHumidite");
                 client.subscribe("topicLumiere");
-                client.subscribe("topicEclairage");
+                client.subscribe("topicEtatEclairage");
             }
     
             function onConnectionLost(responseObject) {
@@ -172,12 +177,13 @@
                         updateChart(lightIntensityChart, lightIntensityData, parseFloat(message.payloadString), time);
                         infoLumiere.innerHTML = message.payloadString + ' lux';
                         break;
-                    case"topicEclairage":
-                        etatLumieres.innerHTML = message.payloadString;
+                      case "topicEtatEclairage": // Ajoutez ce cas pour traiter le message pour le contrôle des LED
+                        isLightOn = message.payloadString
                         break;
                     case"topicPompe":
-                    etatPompe.innerHTML = message.payloadString;
-                    break;
+                        etatPompe.innerHTML = message.payloadString;
+              
+                        break; 
                 }
             }
     
@@ -221,7 +227,20 @@
                 };
             }
     
+            function toggleLight() {
+            let newStatus = (isLightOn === "on") ? "off" : "on";
+            const message = new Paho.MQTT.Message(newStatus);
+            message.destinationName = "topicEtatEclairage";
+            client.send(message);
+            let newStatusMessage = (newStatus === "on") ? "Allumé" : "Éteinte";
+            etatLumieres.innerHTML = newStatusMessage;
+            console.log('message sent: ' + newStatus)
+        }
     
+        document.getElementById('publishLightSwitch').onclick = function() {
+          toggleLight();
+        };
+
             window.onload = function() {
                 MQTTconnect();
                 temperatureChart = new Chart(document.getElementById('temperatureChart').getContext('2d'), createChartConfig('Température', temperatureData, 'Température (°C)'));
