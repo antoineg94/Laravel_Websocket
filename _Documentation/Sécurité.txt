@@ -1,0 +1,7 @@
+Pour la sécurité nous avons mis en place les mesures suivantes:
+
+Page de connxion (pour accéder aux données des plantes)
+-Avec mot de passe encrypté
+
+Système de sécurité
+-Averti l'utilisateur si un intrus est proche du jardin (capteur de distance)

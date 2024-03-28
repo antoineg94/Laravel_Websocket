@@ -1,0 +1,3 @@
+Mesures prise pour l'assurance qualité:
+
+test fonctionnels fait avec selenium pour tester la connexion au site
