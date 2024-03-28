@@ -92,16 +92,19 @@
                             </div>
                           </button>
                           <div class="bg-white rounded-lg shadow-md p-6">
+                              <h2 class="text-xl font-bold mb-4">État de la sécurité</h2>
+                              <strong id="etatSecurite">Aucune donnée</strong>
+                            </div>
+                            <div class="bg-white rounded-lg shadow-md p-6">
                               <h2 class="text-xl font-bold mb-4">État de la pompe</h2>
                               <strong id="etatPompe">Allumé / Éteinte</strong>
                             </div>
+                            <div class="bg-white rounded-lg shadow-md p-6">
+                              <h2 class="text-xl font-bold mb-4">État de du sol</h2>
+                              <strong id="etatSol">Aucune donnée</strong>
+                            </div>
                       </div>
                   </div>
-     {{--              <form action="{{ route('lumiere.store') }}" method="POST">
-                    @csrf 
-                    <input type="hidden" name="payloadString" value="{{ message.payloadString }}">
-                    <button type="submit">Submit</button>
-                </form> --}}
             </div>
         </div>
     <style>
@@ -127,6 +130,8 @@
 
             let etatLumieres;
             let etatPompe;
+            let etatSol;
+            let etatSecurite;
             let isLightOn = '';
 
             let etatLightSwitch;
@@ -136,6 +141,9 @@
             infoTemperature = document.getElementById('infoTemperature');
 
             etatLumieres = document.getElementById('etatLumieres');
+            etatPompe = document.getElementById('etatPompe');
+            etatSol = document.getElementById('etatSol');
+            etatSecurite = document.getElementById('etatSecurite');
     
             function MQTTconnect() {
                 client = new Paho.MQTT.Client("172.16.72.193", 9001, "clientId" + new Date().getTime());
@@ -151,6 +159,8 @@
                 client.subscribe("topicHumidite");
                 client.subscribe("topicLumiere");
                 client.subscribe("topicEtatEclairage");
+                client.subscribe("topicSenseurHumidite");
+                client.subscribe("topicIntrus");
             }
     
             function onConnectionLost(responseObject) {
@@ -180,9 +190,14 @@
                       case "topicEtatEclairage": // Ajoutez ce cas pour traiter le message pour le contrôle des LED
                         isLightOn = message.payloadString
                         break;
-                    case"topicPompe":
-                        etatPompe.innerHTML = message.payloadString;
-              
+                    case"topicSenseurHumidite":
+                        isPumpOn = message.payloadString
+                        updateEtatPompe();
+                        updateEtatSol();
+                        break; 
+                    case"topicIntrus":
+                        isSecurityOn = message.payloadString
+                        updateEtatSecurite();
                         break; 
                 }
             }
@@ -236,7 +251,34 @@
             etatLumieres.innerHTML = newStatusMessage;
             console.log('message sent: ' + newStatus)
         }
+
+        function updateEtatSol() {
+            let newStatus;
+            if (isPumpOn === "sec") {
+                newStatus = "Le sol est sec";
+            } 
+            if (isPumpOn === "humide") {
+                newStatus = "Le sol est humide";
+            } 
+            if (isPumpOn === "presquesec") {
+                newStatus = "Le sol est presque sec";
+            } 
+            if (isPumpOn === "presquehumide") {
+                newStatus = "Le sol est presque humide";
+            } 
+            etatSol.innerHTML = newStatus;
+        }
+
+        function updateEtatPompe() {
+            let newStatus = (isPumpOn === "sec") ? "Allumé" : "Éteinte";
+            etatPompe.innerHTML = newStatus;
+        }
     
+        function updateEtatSecurite() {
+            let newStatus = (isSecurityOn === "aucunintrus") ? "Rien a signaler" : "Un intrus est aux alentours du jardin!";
+            etatSecurite.innerHTML = newStatus;
+        }
+
         document.getElementById('publishLightSwitch').onclick = function() {
           toggleLight();
         };
